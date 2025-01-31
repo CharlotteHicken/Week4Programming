@@ -21,7 +21,7 @@ namespace NodeCanvas.Tasks.Actions{
             Vector3 randomPoint = Random.insideUnitSphere * searchRadius + agent.transform.position;
 
 			NavMeshHit navMeshHit;
-			if(NavMesh.SamplePosition(randomPoint, out navMeshHit, searchRadius, NavMesh.AllAreas))
+			if(!NavMesh.SamplePosition(randomPoint, out navMeshHit, searchRadius, NavMesh.AllAreas))
 			{
 				return;
 			}
@@ -31,7 +31,7 @@ namespace NodeCanvas.Tasks.Actions{
 
 		protected override void OnUpdate(){
 			
-			if(navAgent.pathPending && navAgent.remainingDistance <= navAgent.stoppingDistance)
+			if(!navAgent.pathPending && navAgent.remainingDistance <= navAgent.stoppingDistance)
 			{
 				EndAction(true);
 			}
